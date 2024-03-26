@@ -1,0 +1,10 @@
+JS
+jQuery v3.5.1
+CDN: https://code.jquery.com/jquery-3.5.1.min.js
+
+
+MathJax.js v2.7.7
+https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js
+
+BigInteger.js
+https://peterolson.github.io/BigInteger.js

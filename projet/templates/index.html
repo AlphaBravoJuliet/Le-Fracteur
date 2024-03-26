@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Titre de la page -->
+    <title>Cryptage IBAN</title>
+    <!-- Style lien vers le code css -->
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header>
+    <!-- En-tête -->
+    <h1>Le Fracteur</h1>
+</header>
+<!-- Menu de navigation -->
+<div class="menu">
+    <ul>
+        <!-- Liens -->
+        <li><a href="#home" class="menu-link">Accueil</a></li>
+        <li><a href="#code" class="menu-link">Crypter IBAN &#128274</a></li>
+        <li><a href="#decode" class="menu-link">Décrypter IBAN &#128274</a></li>
+        <li><a href="#demo" class="menu-link">Explications</a></li>
+        <li><a href="#ramanujan" class="menu-link">Fractions Continues</a></li>
+    </ul>
+</div>
+
+<!-- Contenu principal -->
+<div class="container">
+    <!-- Accueil -->
+    <div class="tab-pane fade show active" id="home">
+        <!-- Texte expliquant le but de notre page -->
+        <div class="jumbotron">
+            <h1 class="display-4">Bienvenue sur Cryptage IBAN</h1>
+            <h2 class="lead">Une application pour sécuriser les IBAN. &#128274</h2>
+        </div>
+        <!-- Texte expliquant le but de notre page -->
+        <div class="row">
+            <div class="col-md-8">
+                <p>Cette application permet de chiffrer et déchiffrer les IBAN de manière sécurisée.</p>
+                <p>Avant d'utiliser le service, assurez-vous de disposer d'un IBAN valide. Attention: tous les pays n'utilisent pas le même format d'IBAN, il est possible que l'encodeur ne marche pas pour certains pays.</p>
+                <p>Une fois l'IBAN valide obtenu, vous pouvez le chiffrer en utilisant notre service.</p>
+                <p>Accédez à la page de chiffrement pour crypter votre IBAN.</p>
+                <!-- Image de la numworks -->
+                <div style="text-align: center;">
+                    <img src="https://lh3.googleusercontent.com/drive-viewer/AKGpihb_tcSIESxyI1HgSuA0X59g3w9W_-9bCZChenVACzetHcb04c41pu2wWlk-1zT4f4opSjs6_KsCd3HOSyv7XOOFWRwh6w=w1920-h970" alt="Le Fracteur sur Numworks" height="250" style="border-radius: 10px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);">
+                </div>
+                <!-- Lien de téléchargement de notre code -->
+                <a href="https://my.numworks.com/python/david-lopez/le_fracteur" style="color:rgb(255,255,255); "> Téléchargez Le Fracteur pour votre Numworks !</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Crypter IBAN -->
+    <div class="tab-pane fade" id="code">
+        <!-- Formulaire de cryptage -->
+        <form id="encrypt-form">
+            <div class="form-group">
+                <label for="code-phrase">Entrez un IBAN à crypter (si l'IBAN est invalide ne renvoie rien) :</label>
+                <input type="text" class="form-control" id="code-phrase" name="phrase" required>
+            </div>
+            <!-- Bouton de cryptage -->
+            <button type="submit" class="btn btn-primary">Crypter</button>
+        </form>
+        <!-- Résultat du cryptage -->
+        <div id="code-result" class="mt-4"></div>
+    </div>
+
+    <!-- Décrypter IBAN -->
+    <div class="tab-pane fade" id="decode">
+        <!-- Formulaire de déchiffrement -->
+        <form id="decrypt-form">
+            <div class="form-group">
+                <label for="decode-phrase">Entrez la fraction à décrypter pour obtenir l'IBAN :</label>
+                <input type="text" class="form-control" id="decode-phrase" name="phrase" required>
+            </div>
+            <!-- Bouton de déchiffrement -->
+            <button type="submit" class="btn btn-primary">Décrypter</button>
+        </form>
+        <!-- Résultat du déchiffrement -->
+        <div id="decode-result" class="mt-4"></div>
+    </div>
+
+    <!-- Fractions Continues -->
+    <div class="tab-pane fade" id="ramanujan">
+        <!-- Formulaire pour signature fractionnaire -->
+        <div class="input-group mb-3">
+            <div class="input-group-append">
+            </div>
+        </div>
+        <!-- Pour signature fractionnaire personnalisée -->
+        <ul id="ramanujan-fractions">
+            <h3>Fractions Continues</h3>
+            <label for="userInput">Entrez votre prénom pour obtenir votre signature fractionnaire personnalisée :</label>
+            <input type="text" class="form-control" id="userInput" name="userInput" required>
+                <!-- Bouton pour convertir -->
+                <button class="btn btn-ramanujan" onclick="convertirEtAfficher()">Crypter</button>
+                <!-- Résultat -->
+                <div id="result"></div>
+                
+            <!-- Scripts -->
+            <script src="https://peterolson.github.io/BigInteger.js/BigInteger.min.js"></script>
+            <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+            <p>Entrez une fraction sous la forme x/y:</p>
+            <input type="text" class="form-control" id="fractionInput" name="userInput" required>
+            <button class="btn btn-primary" onclick="calculer()" onclick="convertirEtAfficher()">Décrypter</button>
+            <div id="output"></div>
+        </div>
+
+        
+        </ul>
+    </div>
+
+ <!-- Explications fractions -->
+ <div class="tab-pane fade" id="demo">
+    <h1>Fractions Continues et Cryptage</h1>
+
+    <h2>Introduction</h2>
+    <p>Les fractions continues sont des expressions mathématiques qui représentent de manière précise les nombres réels. Le mathématicien Ramanujan, du début du 20e siècle, a beaucoup travaillé sur ces fractions. Dans cet article, nous allons explorer comment elles sont utilisées dans le domaine du cryptage.</p>
+
+    <h2>Fractions Continues</h2><br>
+
+    <p>Une fraction continue est une expression de la forme \(a_0 + \cfrac{1}{a_1 + \cfrac{1}{a_2 + \cfrac{1}{a_3 + \ldots}}}\), où \(a_1, a_2, \ldots\) sont des nombres entiers. Elles permettent de représenter des nombres réels de manière précise. Voici quelques exemples célèbres :</p>
+    <ul>
+        <li>\(\phi = 1 + \dfrac{1}{1 + \dfrac{1}{1 + \dfrac{1}{+\ldots}}}\)</li>
+        <li>\( \sqrt{a^2 + b} = a + \dfrac{b}{2a + \dfrac{b}{2a + \dfrac{b}{2a}}}\)</li>
+        <li>\(\sqrt{2} = 1 + \dfrac{1}{2 + \dfrac{1}{2 + \dfrac{1}{2 + \ldots}}}\)</li>
+        <li>\( e = 2 + \dfrac{1}{1 + \dfrac{1}{2 + \dfrac{1}{1 + \dfrac{1}{1+ \dfrac{1}{4+ \ldots }}}}} \)</li>
+    </ul>
+
+    <h2>Faits Curieux et Démonstrations</h2>
+    <p>La <strong>réduite</strong> d'un nombre est la fraction continue tronquée, qui fournit de bonnes approximations.</p>
+
+    <h3>1. \(\sqrt{a^2 + b}\)</h3>
+    <p>La démonstration du résultat énoncé dans la section "Faits Curieux" se fait par la résolution de l'équation \(x = a + \dfrac{b}{a + x}\). En remplaçant \(x\) par \(a + \dfrac{b}{a + x}\) dans le terme de droite, on obtient :</p>
+    <p>\[x = a + \dfrac{b}{a + x}\]</p>
+    <p>\[ \Leftrightarrow x(a + x) = a(a + x) + b\]</p>
+    <p>\[ \Leftrightarrow xa + x^2 = a^2 + ax + b\]</p>
+    <p>\[ \Leftrightarrow x^2 = a^2 + b\]</p>
+    <p>\[ \Leftrightarrow x = \sqrt{a^2 + b}\]</p>
+
+    <h3>2. Séquence de Fibonacci</h3>
+    <p>La n-ième réduite de la fraction continue du nombre \(\phi\) est le quotient d'un nombre de Fibonacci sur le précédent, ce qui est très intéressant.</p>
+
+    <h3>3. Formule d'Euler pour les Fractions Continues</h3>
+    <p>Une formule intéressante concernant les fractions continues finies est la suivante :</p>
+    <p>\(a_0+a_0a_1+a_0a_1a_2+\dots+a_0a_1a_2\dots a_{n-1}a_n = \dfrac{a_0}{1-\dfrac{a_1}{1+a_1-\dfrac{a_2}{1+a_2-\dfrac{a_3}{1+a_3-\dots}}}} \)</p>
+
+    <p>Pour les nombres rationnels la fraction continue simple est finie. Par exemple :</p>
+    <p>\(\dfrac{333}{106}=3+\dfrac{15}{106}=3+\dfrac{1}{\dfrac{106}{15}}=3+\dfrac{1}{7+\dfrac{1}{15}}\)</p>
+
+    <h2>Le Code de Cryptage</h2>
+    <p>On a créé un code de cryptage qui utilise les fractions continues. Voici comment ça marche :</p>
+    <ol>
+        <li><strong>Cryptage</strong> : Pour coder un message, on convertit chaque caractère en un entier strictement positif, on les place dans l’ordre dans une fraction continue et on en calcule le numérateur et dénominateur.</li>
+        <li><strong>Décryptage</strong> : Pour décoder le message, on inverse la fraction continue en utilisant l'Algorithme d'Euclide pour retrouver les nombres d’origine, puis on traduit chaque nombre par le caractère qu’il encode.</li>
+
+    </ol>
+
+    <h3>Notre Expérience</h3>
+    <p>On a découvert les fractions continues grâce à des livres de maths. On a voulu en savoir plus sur elles et on a finalement trouvé une application pour la cryptographie.
+    Si votre curiosité est piquée, voilà plusieurs liens qui peuvent vous intérésser:
+    </br>- un (vieux) livre qui peut servir d'introduction (<a href="https://www.ms.uky.edu/~sohum/ma330/files/Continued%20Fractions.pdf" style="color:#FFFFFF;" target="_blank" >Lien du PDF</a>)
+    </br>- une vidéo (de la chaîne "Mathologer") qui explique comment le mathématicien indien Ramanujan a résolu une célèbre énigme avec des fractions continues (<a href="https://youtu.be/V2BybLCmUzs" style="color:#FFFFFF;" target="_blank" >Lien YouTube</a>)
+    </br>- un site qui explique en détail l'énigme et son lien avec les fractions continues (<a href="http://villemin.gerard.free.fr/aJeux1/Arithmet/Maison.htm" style="color:#FFFFFF;" target="_blank" >Site de Gerard Villemin</a>)
+    </p>
+</body>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="/static/script.js"></script>
+
+
+<script>
+// Fonction pour gérer le clic sur les liens du menu
+const handleMenuClick = event => {
+    event.preventDefault(); // Empêche le comportement par défaut du lien
+    const targetId = $(event.target).attr('href'); // Obtient l'ID de l'onglet cible
+    $('.tab-pane').hide();
+    $(targetId).show();
+};
+
+// Ajoute le gestionnaire d'événements aux liens du menu
+$('.menu-link').on('click', handleMenuClick);
+
+
+// Fonction pour copier la fraction encodée dans le presse-papiers
+const copierFractionEncryptee = fractionEncryptee => {
+    navigator.clipboard.writeText(fractionEncryptee)
+        .then(() => {
+            alert('IBAN encodée copiée dans le presse-papiers : ' + fractionEncryptee);
+        })
+        .catch(error => {
+            console.error('Erreur lors de la copie dans le presse-papiers : ', error);
+        });
+};
+
+// Fonction pour créer un bouton de copie
+const createCopyButton = (fractionEncryptee) => {
+    const copyButton = document.createElement('button');
+    copyButton.textContent = 'Copier la fraction';
+    copyButton.className = 'btn btn-ramanujan'; 
+    copyButton.onclick = () => copierFractionEncryptee(fractionEncryptee);
+    return copyButton;
+};
+
+// Gestionnaire d'événements pour le formulaire d'encodage
+document.getElementById('encrypt-form').addEventListener('submit', event => {
+    event.preventDefault();
+    const message = document.getElementById('code-phrase').value;
+    fetch('/encrypt', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message })
+    })
+    .then(response => response.json())
+    .then(data => {
+        const codeResult = document.getElementById('code-result');
+        codeResult.innerText = "IBAN encrypté sous forme de fraction: " + data.encrypted_fraction;
+
+        // Crée le bouton de copie et l'ajoute à l'élément de résultat
+        codeResult.appendChild(document.createElement('br'));
+        codeResult.appendChild(createCopyButton(data.encrypted_fraction));
+    });
+});
+
+// Gestionnaire d'événements pour le formulaire de décodage
+document.getElementById('decrypt-form').addEventListener('submit', event => {
+    event.preventDefault();
+    const fraction = document.getElementById('decode-phrase').value;
+    fetch('/decrypt', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ fraction })
+    })
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById('decode-result').innerText = "IBAN décrypté: " + data.decrypted_message;
+    });
+});
+
+
+</script>
