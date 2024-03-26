@@ -4,9 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Titre de la page -->
-    <title>Cryptage IBAN</title>
+    <title>Le Fracteur</title>
     <!-- Style lien vers le code css -->
     <link rel="stylesheet" href="/static/style.css">
+    <!-- Icon de la page, fraction 1/2 -->
+    <link rel="icon" href="https://cdn4.iconfinder.com/data/icons/pear-ui-typography/24/fractions-512.png" type="image/png">
+
 </head>
 <body>
 <header>
@@ -97,7 +100,7 @@
                 <button class="btn btn-ramanujan" onclick="convertirEtAfficher()">Crypter</button>
                 <!-- Résultat -->
                 <div id="result"></div>
-                
+
             <!-- Scripts -->
             <script src="https://peterolson.github.io/BigInteger.js/BigInteger.min.js"></script>
             <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
@@ -107,7 +110,7 @@
             <div id="output"></div>
         </div>
 
-        
+
         </ul>
     </div>
 
@@ -116,11 +119,23 @@
     <h1>Fractions Continues et Cryptage</h1>
 
     <h2>Introduction</h2>
-    <p>Les fractions continues sont des expressions mathématiques qui représentent de manière précise les nombres réels. Le mathématicien Ramanujan, du début du 20e siècle, a beaucoup travaillé sur ces fractions. Dans cet article, nous allons explorer comment elles sont utilisées dans le domaine du cryptage.</p>
+    <p>Les fractions continues sont des expressions mathématiques qui représentent de manière précise les nombres réels. Le mathématicien Ramanujan, du début du 20e siècle, a beaucoup travaillé sur ces fractions.</p>
 
     <h2>Fractions Continues</h2><br>
 
-    <p>Une fraction continue est une expression de la forme \(a_0 + \cfrac{1}{a_1 + \cfrac{1}{a_2 + \cfrac{1}{a_3 + \ldots}}}\), où \(a_1, a_2, \ldots\) sont des nombres entiers. Elles permettent de représenter des nombres réels de manière précise. Voici quelques exemples célèbres :</p>
+    <p>Une <span style="font-weight: bold; color: #F5A86B;">fraction continue simple</span> est une expression de la forme \(a_0 + \cfrac{1}{a_1 + \cfrac{1}{a_2 + \cfrac{1}{a_3 + \ldots}}}\), où \(a_1, a_2, \ldots\) sont des nombres entiers. Elles permettent de représenter des nombres réels de manière précise.
+    </p>
+    <p>Pour les nombres rationnels la fraction continue simple est finie (en opposition à celle des nombres irrationnels qui elle est infinie). Par exemple :</p>
+    <p>\(\dfrac{333}{106}=3+\dfrac{15}{106}=3+\dfrac{1}{\dfrac{106}{15}}=3+\dfrac{1}{7+\dfrac{1}{15}}\)
+    </br> Exprimer sous forme de fraction simple continue correspond à appliquer l'<span style="font-weight: bold; color: #F5A86B;">Algorithme d'Euclide</span>:
+    \(333 = \mathbf{3} \times 106 + 15
+    \\ 106 = \mathbf{7} \times 15  + 1
+    \\ 15 = \mathbf{15}\times 1 + 0 \)
+    </p>
+
+
+
+    <p>Voilà quelques exemples de fractions continues : </p>
     <ul>
         <li>\(\phi = 1 + \dfrac{1}{1 + \dfrac{1}{1 + \dfrac{1}{+\ldots}}}\)</li>
         <li>\( \sqrt{a^2 + b} = a + \dfrac{b}{2a + \dfrac{b}{2a + \dfrac{b}{2a}}}\)</li>
@@ -129,32 +144,32 @@
     </ul>
 
     <h2>Faits Curieux et Démonstrations</h2>
-    <p>La <strong>réduite</strong> d'un nombre est la fraction continue tronquée, qui fournit de bonnes approximations.</p>
+    <p>La <span style="font-weight: bold; color: #F5A86B;">réduite</span> d'un nombre est la fraction continue tronquée, elles sont d'excellentes approximations.</p>
 
-    <h3>1. \(\sqrt{a^2 + b}\)</h3>
-    <p>La démonstration du résultat énoncé dans la section "Faits Curieux" se fait par la résolution de l'équation \(x = a + \dfrac{b}{a + x}\). En remplaçant \(x\) par \(a + \dfrac{b}{a + x}\) dans le terme de droite, on obtient :</p>
+    <h3>1. \(\sqrt{a^2 + b}\) Raphaël Bombelli (1526,1572)</h3>
+    <p>La démonstration de ce résultat se fait par la résolution de l'équation \(x = a + \dfrac{b}{a + x}\). En remplaçant \(x\) par \(a + \dfrac{b}{a + x}\) dans le terme de droite, on obtient :</p>
     <p>\[x = a + \dfrac{b}{a + x}\]</p>
     <p>\[ \Leftrightarrow x(a + x) = a(a + x) + b\]</p>
     <p>\[ \Leftrightarrow xa + x^2 = a^2 + ax + b\]</p>
     <p>\[ \Leftrightarrow x^2 = a^2 + b\]</p>
     <p>\[ \Leftrightarrow x = \sqrt{a^2 + b}\]</p>
 
-    <h3>2. Séquence de Fibonacci</h3>
-    <p>La n-ième réduite de la fraction continue du nombre \(\phi\) est le quotient d'un nombre de Fibonacci sur le précédent, ce qui est très intéressant.</p>
+    <h3>2. Séquence de Fibonacci \(0,1,1,2,3,5,8,13, \ldots \)</h3>
+    <p>Les réduites de la fraction continue du nombre \(\phi\) sont toutes le quotient d'un nombre de Fibonacci sur le précédent.
+    Par exemple: \( 1+\dfrac{1}{1+\dfrac{1}{1+\dfrac{1}{1+\dfrac{1}{1}}}} = \dfrac{8}{5}\)
+    </p>
 
     <h3>3. Formule d'Euler pour les Fractions Continues</h3>
     <p>Une formule intéressante concernant les fractions continues finies est la suivante :</p>
     <p>\(a_0+a_0a_1+a_0a_1a_2+\dots+a_0a_1a_2\dots a_{n-1}a_n = \dfrac{a_0}{1-\dfrac{a_1}{1+a_1-\dfrac{a_2}{1+a_2-\dfrac{a_3}{1+a_3-\dots}}}} \)</p>
 
-    <p>Pour les nombres rationnels la fraction continue simple est finie. Par exemple :</p>
-    <p>\(\dfrac{333}{106}=3+\dfrac{15}{106}=3+\dfrac{1}{\dfrac{106}{15}}=3+\dfrac{1}{7+\dfrac{1}{15}}\)</p>
 
     <h2>Le Code de Cryptage</h2>
     <p>On a créé un code de cryptage qui utilise les fractions continues. Voici comment ça marche :</p>
     <ol>
-        <li><strong>Cryptage</strong> : Pour coder un message, on convertit chaque caractère en un entier strictement positif, on les place dans l’ordre dans une fraction continue et on en calcule le numérateur et dénominateur.</li>
-        <li><strong>Décryptage</strong> : Pour décoder le message, on inverse la fraction continue en utilisant l'Algorithme d'Euclide pour retrouver les nombres d’origine, puis on traduit chaque nombre par le caractère qu’il encode.</li>
-
+        <li><span style="font-weight: bold; color: #F5A86B;">Cryptage</span> : Pour coder un message, on convertit chaque caractère en un entier strictement positif, on les place le long d'une fraction continue et on en calcule le numérateur et dénominateur.</li>
+        <li><span style="font-weight: bold; color: #F5A86B;">Décryptage</span> : Pour décoder le message, on inverse la fraction continue en utilisant l'Algorithme d'Euclide pour retrouver les nombres d’origine, puis on traduit chaque nombre par le caractère qu’il encode.</li>
+        <p>NB: plus les nombres sont grands plus le numérateur et dénominateur sera long, nous avons donc adapté le cryptage IBAN de manière à que les fractions continues ne soient pas trop longues.</p>
     </ol>
 
     <h3>Notre Expérience</h3>
@@ -162,7 +177,7 @@
     Si votre curiosité est piquée, voilà plusieurs liens qui peuvent vous intérésser:
     </br>- un (vieux) livre qui peut servir d'introduction (<a href="https://www.ms.uky.edu/~sohum/ma330/files/Continued%20Fractions.pdf" style="color:#FFFFFF;" target="_blank" >Lien du PDF</a>)
     </br>- une vidéo (de la chaîne "Mathologer") qui explique comment le mathématicien indien Ramanujan a résolu une célèbre énigme avec des fractions continues (<a href="https://youtu.be/V2BybLCmUzs" style="color:#FFFFFF;" target="_blank" >Lien YouTube</a>)
-    </br>- un site qui explique en détail l'énigme et son lien avec les fractions continues (<a href="http://villemin.gerard.free.fr/aJeux1/Arithmet/Maison.htm" style="color:#FFFFFF;" target="_blank" >Site de Gerard Villemin</a>)
+    </br>- un site qui explique en détail l'énigme et son lien avec les fractions continues (<a href="http://villemin.gerard.free.fr/aJeux1/Arithmet/Maison.htm" style="color:#FFFFFF;" target="_blank" >Site de Gérard Villemin</a>)
     </p>
 </body>
 
@@ -198,7 +213,7 @@ const copierFractionEncryptee = fractionEncryptee => {
 const createCopyButton = (fractionEncryptee) => {
     const copyButton = document.createElement('button');
     copyButton.textContent = 'Copier la fraction';
-    copyButton.className = 'btn btn-ramanujan'; 
+    copyButton.className = 'btn btn-ramanujan';
     copyButton.onclick = () => copierFractionEncryptee(fractionEncryptee);
     return copyButton;
 };
