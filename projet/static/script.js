@@ -4,35 +4,36 @@ window.onload = function() {
 };
 
 // Fonction pour convertir une chaîne de caractères en liste de nombres
+
 function convertirChaineEnListe(inputString) {
     var listeResultat = [];
+    const specialCharacters = ":;,!·$%&/()=?^*¨Ç{}[]'¡ºªçÇéÉèÈêÊëËáÁàÀâÂäÄãÃåÅúÚùÙûÛüÜíÍìÌîÎïÏóÓòÒôÔöÖñÑ.-_1234567890";
 
-    for (var i = 0; i < inputString.length; i++) {  
-        var codeChar = inputString.charCodeAt(i);
+    for (var i = 0; i < inputString.length; i++) {
+        var char = inputString[i];
 
-        // Gestion des lettres minuscules (a: 1, b: 2, ..., z: 26)
-        if (codeChar >= 97 && codeChar <= 122) {
-            listeResultat.push(codeChar - 96); 
+        // Minuscules (a: 1, b: 2, ..., z: 26)
+        if (char >= 'a' && char <= 'z') {
+            listeResultat.push(char.charCodeAt(0) - 96);
         }
-        // Gestion des lettres majuscules (A: 27, B: 28, ..., Z: 52)
-        else if (codeChar >= 65 && codeChar <= 90) {
-            listeResultat.push(codeChar - 64 + 26); 
+        // Majuscules (A: 27, B: 28, ..., Z: 52)
+        else if (char >= 'A' && char <= 'Z') {
+            listeResultat.push(char.charCodeAt(0) - 64 + 26);
         }
-        // Gestion des nombres (0: 53, 1: 54, ..., 9: 62)
-        else if (codeChar >= 48 && codeChar <= 57) {
-            listeResultat.push(codeChar - 21); 
+        // Espace
+        else if (char === ' ') {
+            listeResultat.push(53);
         }
-        // Gestion de l'espace
-        else if (codeChar === 32) {
-            listeResultat.push(63); 
-        }
-        // Gestion du point (.)
-        else if (codeChar === 46) {
-            listeResultat.push(64); 
+        // Caractères spéciaux
+        else if (specialCharacters.includes(char)) {
+            var index = specialCharacters.indexOf(char);
+            listeResultat.push(54 + index);
         }
     }
     return listeResultat;
 }
+
+
 
 // Fonction pour calculer la fraction à partir d'une liste de nombres
 function calculerFraction(nombreListe) {
@@ -72,20 +73,20 @@ function creerFractionContinue(nombres) {
 function convertirEtAfficher() {
     var userInput = document.getElementById('userInput').value;
     var listeNombres = convertirChaineEnListe(userInput);
-    
+
     // Calculer la fraction à partir de la liste de nombres
     var fraction = calculerFraction(listeNombres);
     // Créer la fraction continue à partir de la liste de nombres
     var fractionContinue = 'Fraction Continue: \\[' + creerFractionContinue(listeNombres) + '\\]';
-    
+
     // Afficher à la fois la fraction continue et la fraction normale
     var resultHtml = fractionContinue + '<br>' + 'Fraction Normale: ' + fraction[0] + '/' + fraction[1] + '<br>';
-    
+
     // Ajouter un bouton Copy à côté de la fraction normale
     resultHtml += '<button class="btn btn-ramanujan" onclick="copyFraction()">Copier</button>';
 
     document.getElementById('result').innerHTML = resultHtml;
-    
+
     // Utiliser MathJax pour rendre le LaTeX
     MathJax.Hub.Queue(["Typeset", MathJax.Hub, "result"]);
 }
@@ -106,10 +107,10 @@ function copyFraction() {
     }
 }
 
-// Fonction pour décrypter la fraction normale en chaîne de caractères
 function calculer() {
     var fraction = document.getElementById("fractionInput").value;
     var nombres = [];
+    const specialCharacters = ":;,!·$%&/()=?^*¨Ç{}[]'¡ºªçÇéÉèÈêÊëËáÁàÀâÂäÄãÃåÅúÚùÙûÛüÜíÍìÌîÎïÏóÓòÒôÔöÖñÑ.-_1234567890";
 
     var parties = fraction.split('/');
     var dividende = BigInt(parties[0]);
@@ -128,11 +129,11 @@ function calculer() {
         if (nombre >= 1n && nombre <= 26n) {
             return String.fromCharCode(Number(nombre) + 96); // a=1, b=2, ..., z=26
         } else if (nombre >= 27n && nombre <= 52n) {
-            return String.fromCharCode(Number(nombre) + 38); // A=27, B=28, ..., Z=52
-        } else if (nombre === 0n) {
+            return String.fromCharCode(Number(nombre) + 64 - 26); // A=27, B=28, ..., Z=52
+        } else if (nombre === 53n) {
             return " "; // Espace
-        } else if (nombre === 63n) {
-            return " "; // Espace pour 63
+        } else if (nombre >= 54n && nombre < 54n + BigInt(specialCharacters.length)) {
+            return specialCharacters.charAt(Number(nombre) - 54); // Caractères spéciaux et accentués
         } else {
             return ""; // Ignorer les autres nombres
         }
@@ -140,3 +141,6 @@ function calculer() {
 
     document.getElementById("output").textContent = resultat;
 }
+
+
+
